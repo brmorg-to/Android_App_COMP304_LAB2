@@ -36,11 +36,11 @@ class Formulary : AppCompatActivity() {
             }
             "Credit Card" -> {
                 binding.paymentEntry.setMask("#### - #### - #### - ####")
-                binding.paymentEntry.hint = "0000 - 0000 - 0000 - 0000"
+                binding.paymentEntry.hint = "Please enter your Credit Card Number"
             }
             "Debit Card" -> {
                 binding.paymentEntry.setMask("#### - ## - ######## - ##")
-                binding.paymentEntry.hint = "0000 - 00 - 00000000 - 00"
+                binding.paymentEntry.hint = "Please enter you Debit Card Number"
             }
         }
 
@@ -91,16 +91,12 @@ class Formulary : AppCompatActivity() {
                 val intent = Intent(this, Success::class.java)
                 startActivity(intent)
             }
-
-
         }
-
     }
 
 //    private fun isValidNumericInput(input: String): Boolean {
 //        return input.isNotBlank() && input.all { it.isDigit() }
 //    }
-
 
     companion object {
         fun newIntent(packageContext: Context, paymentMethod: String): Intent {

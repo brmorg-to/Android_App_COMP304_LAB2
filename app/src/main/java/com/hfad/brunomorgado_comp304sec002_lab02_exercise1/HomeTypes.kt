@@ -39,11 +39,11 @@ class HomeTypes : AppCompatActivity() {
                 return true
             }
             R.id.condominium -> {
-                // Handle about item click
+                displayFragment(Condominium())
                 return true
             }
             R.id.townHouse -> {
-                // Handle about item click
+                displayFragment(TownHouse())
                 return true
             }
 

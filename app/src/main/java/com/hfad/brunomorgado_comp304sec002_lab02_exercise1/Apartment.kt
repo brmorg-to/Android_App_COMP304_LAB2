@@ -26,11 +26,11 @@ class Apartment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_apartment, container, false)
-        val selections = arrayListOf<String>()
+        var selections = arrayListOf<String>()
         val checkout = view.findViewById<Button>(R.id.apartmentCheckoutButton)
 
         checkout.setOnClickListener{
-            selections.add(view.findViewById<TextView>(R.id.apartmentHeader).text.toString())
+           selections.add(view.findViewById<TextView>(R.id.apartmentHeader).text.toString())
 
            if(view.findViewById<CheckBox>(R.id.checkBox1)?.isChecked == true) {
                selections.add(view.findViewById<TextView>(R.id.textView).text.toString())
@@ -42,25 +42,27 @@ class Apartment : Fragment() {
                selections.add(view.findViewById<TextView>(R.id.textView3).text.toString())
            }
 
-            val preferencesManager = PreferencesManager(requireContext())
-            for((index, value) in selections.withIndex()) {
-                if(index == 0){
-                    preferencesManager.addSelectedOption("Home type", value)
-                } else {
-                    preferencesManager.addSelectedOption("${selections[0]}_$index", value)
-                }
-            }
-            val selectedOptionsString = preferencesManager.toString()
-            Log.d("Apartments", "Selected Apartments: $selectedOptionsString")
+            Log.d("Selections Size", "${selections.count()}")
 
-            val intent = HomeDetails.newIntent(requireContext(), selections )
-            startActivity(intent)
+           if(selections.count() < 2) {
+               Toast.makeText(requireContext(), "You must select at least one option", Toast.LENGTH_LONG).show()
+               selections = arrayListOf<String>()
+           } else{
+               val preferencesManager = PreferencesManager(requireContext())
+               for((index, value) in selections.withIndex()) {
+                   if(index == 0){
+                       preferencesManager.addSelectedOption("Home type", value)
+                   } else {
+                       preferencesManager.addSelectedOption("${selections[0]}_$index", value)
+                   }
+               }
+               val selectedOptionsString = preferencesManager.toString()
+               Log.d("Apartments", "Selected Apartments: $selectedOptionsString")
+
+               val intent = HomeDetails.newIntent(requireContext(), selections )
+               startActivity(intent)
+           }
         }
-
         return view
     }
-
-
-
-
 }

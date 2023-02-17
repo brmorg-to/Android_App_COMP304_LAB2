@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import preferences.PreferencesManager
 
 /**
@@ -24,7 +25,7 @@ class DetachedHome : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_detached_home, container, false)
-        val selections = arrayListOf<String>()
+        var selections = arrayListOf<String>()
         val checkout = view.findViewById<Button>(R.id.detachedCheckoutButton)
 
         checkout.setOnClickListener{
@@ -40,21 +41,27 @@ class DetachedHome : Fragment() {
                 selections.add(view.findViewById<TextView>(R.id.textView3).text.toString())
             }
 
-            val preferencesManager = PreferencesManager(requireContext())
-            for((index, value) in selections.withIndex()) {
-                if(index == 0){
-                    preferencesManager.addSelectedOption("Home type", value)
-                } else {
-                    preferencesManager.addSelectedOption("${selections[0]}_$index", value)
+            Log.d("Selections Size", "${selections.count()}")
+
+            if(selections.count() < 2) {
+                Toast.makeText(requireContext(), "You must select at least one option", Toast.LENGTH_LONG).show()
+                selections = arrayListOf<String>()
+            } else{
+                val preferencesManager = PreferencesManager(requireContext())
+                for((index, value) in selections.withIndex()) {
+                    if(index == 0){
+                        preferencesManager.addSelectedOption("Home type", value)
+                    } else {
+                        preferencesManager.addSelectedOption("${selections[0]}_$index", value)
+                    }
                 }
+                val selectedOptionsString = preferencesManager.toString()
+                Log.d("Detached Home", "Selected Detached: $selectedOptionsString")
+
+                val intent = HomeDetails.newIntent(requireContext(), selections )
+                startActivity(intent)
             }
-            val selectedOptionsString = preferencesManager.toString()
-            Log.d("Detached", "Selected Detached: $selectedOptionsString")
-
-            val intent = HomeDetails.newIntent(requireContext(), selections )
-            startActivity(intent)
         }
-
         return view
     }
 

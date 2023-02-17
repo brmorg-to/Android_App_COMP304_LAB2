@@ -46,4 +46,18 @@
     <string name="imageSemiDetached1">Image of first semi-detached home</string>
     <string name="imageSemiDetached2">Image of second semi-detached home</string>
     <string name="imageSemiDetached3">Image of third semi-detached home</string>
+    <string name="condominiumHeader">Condominium</string>
+    <string name="descriptionCondominium1">520 King Street: $2,200</string>
+    <string name="descriptionCondominium2">80 Spadina Avenue: $3,300</string>
+    <string name="descriptionCondominium3">100 Adelaide Street: $2,600</string>
+    <string name="imageCondominium1">Image of first condominium</string>
+    <string name="imageCondominium2">Image of second condominium</string>
+    <string name="imageCondominium3">Image of third condominium</string>
+    <string name="townHouseHeader">Town House</string>
+    <string name="descriptionTownHouse1">678 Yonge Street: $2,950</string>
+    <string name="descriptionTownHouse2">200 University Avenue: $2,700</string>
+    <string name="descriptionTownHouse3">330 Richmond Street: $2,650</string>
+    <string name="imageTownHouse1">Image of first Town House</string>
+    <string name="imageTownHouse2">Image of second Town House</string>
+    <string name="imageTownHouse3">Image of third Town House</string>
 </resources>
